@@ -1,0 +1,9 @@
+[project]
+name = "pyinfra-homelab"
+version = "0.1.0"
+description = "Homelab linux configuration with pyinfra"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pyinfra>=3.5",
+]
