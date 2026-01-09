@@ -36,7 +36,16 @@ def configure_fail2ban():
         mode='644',
     )
 
-    if jail_local_op.changed or sshd_jail_op.changed:
+    service_override_op = files.template(
+        name='Deploy fail2ban service override configuration',
+        src='./homelab/fail2ban/service.override.conf.j2',
+        dest='/etc/systemd/system/fail2ban.service.d/override.conf',
+        user='root',
+        group='root',
+        mode='644',
+    )
+
+    if any([jail_local_op.changed, sshd_jail_op.changed, service_override_op.changed]):
         systemd.service(
             name='Restart fail2ban service',
             service='fail2ban',
